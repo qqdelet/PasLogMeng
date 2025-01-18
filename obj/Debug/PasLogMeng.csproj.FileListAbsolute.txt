@@ -1,0 +1,16 @@
+D:\сщву\PasLogMeng\bin\Debug\PasLogMeng.exe.config
+D:\сщву\PasLogMeng\bin\Debug\PasLogMeng.exe
+D:\сщву\PasLogMeng\bin\Debug\PasLogMeng.pdb
+D:\сщву\PasLogMeng\obj\Debug\PasLogMeng.csproj.AssemblyReference.cache
+D:\сщву\PasLogMeng\obj\Debug\MainWindow.g.cs
+D:\сщву\PasLogMeng\obj\Debug\App.g.cs
+D:\сщву\PasLogMeng\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\сщву\PasLogMeng\obj\Debug\PasLogMeng_MarkupCompile.cache
+D:\сщву\PasLogMeng\obj\Debug\PasLogMeng_MarkupCompile.lref
+D:\сщву\PasLogMeng\obj\Debug\MainWindow.baml
+D:\сщву\PasLogMeng\obj\Debug\PasLogMeng.g.resources
+D:\сщву\PasLogMeng\obj\Debug\PasLogMeng.Properties.Resources.resources
+D:\сщву\PasLogMeng\obj\Debug\PasLogMeng.csproj.GenerateResource.cache
+D:\сщву\PasLogMeng\obj\Debug\PasLogMeng.csproj.CoreCompileInputs.cache
+D:\сщву\PasLogMeng\obj\Debug\PasLogMeng.exe
+D:\сщву\PasLogMeng\obj\Debug\PasLogMeng.pdb

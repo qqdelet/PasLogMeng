@@ -1,0 +1,211 @@
+﻿<Window x:Class="PasLogMeng.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PasLogMeng"
+        Title="Password Manager" Height="500" Width="800"
+        Background="#1D2630">
+    <!-- Тёмно-синий фон окна -->
+
+    <Window.Resources>
+        <!-- Конвертер для управления плейсхолдерами -->
+        <local:TextToVisibilityConverter x:Key="TextToVisibilityConverter"/>
+
+        <!-- Определение цветов для ночного режима -->
+        <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#1D2630"/>
+        <SolidColorBrush x:Key="DataGridCellBackgroundColor" Color="#1A2431"/>
+        <SolidColorBrush x:Key="SecondaryBackgroundColor" Color="#2A3542"/>
+        <SolidColorBrush x:Key="TextColor" Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="ButtonBackgroundColor" Color="#4C6273"/>
+        <SolidColorBrush x:Key="ButtonHoverColor" Color="#607A8B"/>
+        <SolidColorBrush x:Key="ComboBoxItemHoverBackground" Color="#3A4A5A"/>
+
+        <!-- Стиль для кнопок -->
+        <Style x:Key="DarkButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource ButtonBackgroundColor}" />
+            <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+            <Setter Property="BorderBrush" Value="{StaticResource ButtonBackgroundColor}" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ButtonHoverColor}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль для ComboBox -->
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="Background" Value="{StaticResource SecondaryBackgroundColor}" />
+            <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource ComboBoxItemHoverBackground}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Стиль для других элементов -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource SecondaryBackgroundColor}" />
+            <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+            <Setter Property="BorderBrush" Value="#3E4A59" />
+            <Setter Property="Height" Value="25" />
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="Background" Value="{StaticResource SecondaryBackgroundColor}" />
+            <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+            <Setter Property="BorderBrush" Value="#3E4A59" />
+            <Setter Property="Height" Value="25" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <TabControl Background="{StaticResource PrimaryBackgroundColor}" Foreground="{StaticResource TextColor}">
+            <!-- Категории -->
+            <TabItem Header="Категории" Background="{StaticResource SecondaryBackgroundColor}">
+                <StackPanel>
+                    <Grid>
+                        <TextBox Name="NewCategoryInput" Margin="0,5"/>
+                        <TextBlock Text="Новая категория" 
+                                   Foreground="{StaticResource TextColor}" 
+                                   VerticalAlignment="Center" 
+                                   Margin="5,0,0,0"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding Text, ElementName=NewCategoryInput, Converter={StaticResource TextToVisibilityConverter}}" />
+                    </Grid>
+                    <Button Content="Добавить категорию" Click="AddCategory_Click" Style="{StaticResource DarkButtonStyle}"/>
+                    <ListBox Name="CategoryList" ItemsSource="{Binding Categories}" Margin="0,10,0,0"/>
+                </StackPanel>
+            </TabItem>
+
+            <!-- Список паролей -->
+            <TabItem Header="Пароли" Background="{StaticResource SecondaryBackgroundColor}">
+                <DataGrid Name="PasswordGrid" AutoGenerateColumns="False" ItemsSource="{Binding Passwords}" CanUserAddRows="False" Background="{StaticResource PrimaryBackgroundColor}" Foreground="{StaticResource TextColor}" SelectionChanged="PasswordGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <!-- Категория -->
+                        <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="*">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Background" Value="{StaticResource DataGridCellBackgroundColor}" />
+                                    <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+
+                        <!-- Название -->
+                        <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Background" Value="{StaticResource DataGridCellBackgroundColor}" />
+                                    <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+
+                        <!-- Почта -->
+                        <DataGridTextColumn Header="Почта" Binding="{Binding Email}" Width="*">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Background" Value="{StaticResource DataGridCellBackgroundColor}" />
+                                    <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+
+                        <!-- Логин -->
+                        <DataGridTextColumn Header="Логин" Binding="{Binding Login}" Width="*">
+                            <DataGridTextColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Background" Value="{StaticResource DataGridCellBackgroundColor}" />
+                                    <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+                                </Style>
+                            </DataGridTextColumn.CellStyle>
+                        </DataGridTextColumn>
+
+                        <!-- Избранное -->
+                        <DataGridCheckBoxColumn Header="Избранное" Binding="{Binding IsFavorite}" Width="Auto">
+                            <DataGridCheckBoxColumn.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Background" Value="{StaticResource DataGridCellBackgroundColor}" />
+                                    <Setter Property="Foreground" Value="{StaticResource TextColor}" />
+                                </Style>
+                            </DataGridCheckBoxColumn.CellStyle>
+                        </DataGridCheckBoxColumn>
+
+                        <!-- Действия -->
+                        <DataGridTemplateColumn Header="Действия" Width="Auto">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Копировать" Click="CopyButton_Click" CommandParameter="{Binding}" Margin="2" Style="{StaticResource DarkButtonStyle}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <!-- Добавить пароль -->
+            <TabItem Header="Добавить" Background="{DynamicResource ComboBox}">
+                <StackPanel>
+                    
+                    <Grid>
+                        <TextBox Name="EmailInput" Margin="0,5"/>
+                        <TextBlock Text="Почта" 
+                                   Foreground="{StaticResource TextColor}" 
+                                   VerticalAlignment="Center" 
+                                   Margin="5,0,0,0"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding Text, ElementName=EmailInput, Converter={StaticResource TextToVisibilityConverter}}" />
+                    </Grid>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="227*"/>
+                            <ColumnDefinition Width="160*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Name="LoginInput" Margin="0,5,0,5" Grid.ColumnSpan="2"/>
+                        <TextBlock Text="Логин" 
+                                   Foreground="{StaticResource TextColor}" 
+                                   VerticalAlignment="Center" 
+                                   Margin="5,0,0,0"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding Text, ElementName=LoginInput, Converter={StaticResource TextToVisibilityConverter}}" Grid.ColumnSpan="2" />
+                    </Grid>
+
+                    <Grid>
+                        <TextBox Name="PasswordInput" Margin="0,5" TextChanged="PasswordInput_TextChanged" 
+             PasswordChar="*" Visibility="{Binding ElementName=PasswordInput, Path=Text.Length, Converter={StaticResource LengthToVisibilityConverter}}"/>
+                        <TextBlock Text="Пароль" 
+               Foreground="{StaticResource TextColor}" 
+               VerticalAlignment="Center" 
+               Margin="5,0,0,0"
+               IsHitTestVisible="False"
+               Visibility="{Binding ElementName=PasswordInput, Path=Text.Length, Converter={StaticResource LengthToVisibilityConverter}}"/>
+                    </Grid>
+
+
+                    <ComboBox Name="CategoryComboBox" ItemsSource="{Binding Categories}" Margin="0,5">
+                        <ComboBox.Background>
+                            <LinearGradientBrush EndPoint="0,1">
+                                <GradientStop Color="#FFF0F0F0"/>
+                                <GradientStop Color="#FF2A3542" Offset="1"/>
+                            </LinearGradientBrush>
+                        </ComboBox.Background>
+                    </ComboBox>
+
+                    <Grid>
+                        <TextBox Name="NameInput" Margin="0,5"/>
+                        <TextBlock Text="Название" 
+                                   Foreground="{StaticResource TextColor}" 
+                                   VerticalAlignment="Center" 
+                                   Margin="5,0,0,0"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding Text, ElementName=NameInput, Converter={StaticResource TextToVisibilityConverter}}" />
+                    </Grid>
+                    <Button Content="Добавить пароль" Click="AddPassword_Click" Style="{StaticResource DarkButtonStyle}"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
